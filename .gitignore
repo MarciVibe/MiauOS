@@ -15,5 +15,5 @@ Cargo.lock
 
 # Ignore binary and o files
 *.o
-/boot
-/multiboot_header
+*.bin
+*.iso
