@@ -87,22 +87,6 @@ error:
     mov byte  [0xb800a], al
     hlt
 
-; Stack memory
-section .bss
-
-; Page tables
-align 4096
-p4_table:
-    resb 4096
-p3_table:
-    resb 4096
-p2_table:
-    resb 4096
-       
-stack_bottom:
-    resb 64
-stack_top:
-
 ;Sets up page tables
 set_up_page_tables:
     ; map first P4 entry to P3 table
@@ -153,3 +137,19 @@ enable_paging:
     mov cr0, eax
 
     ret
+
+; Stack memory
+section .bss
+
+; Page tables
+align 4096
+p4_table:
+    resb 4096
+p3_table:
+    resb 4096
+p2_table:
+    resb 4096
+       
+stack_bottom:
+    resb 64
+stack_top:
