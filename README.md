@@ -15,7 +15,7 @@ binutils
 ld
 grub-mkrescue
 xorriso
-
+grub-pc-bin
 ## Current Features
 Boots
 Print ok to screen
