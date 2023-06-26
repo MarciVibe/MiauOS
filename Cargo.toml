@@ -1,0 +1,7 @@
+[package]
+name = "MiauOS"
+version = "0.1.0"
+authors = ["Marceline Roennfeldt <roen0014@asms.sa.edu.au>"]
+
+[lib]
+crate-type = ["staticlib"]
