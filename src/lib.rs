@@ -2,14 +2,13 @@
 #![no_std]
 
 #[no_mangle]
-pub extern fn rust_main() {}
+pub extern "C" fn rust_main() {}
 
-#[lang = "eh_personality"] 
-#[no_mangle] 
-pub extern fn eh_personality() {}
-
-#[lang = "panic_fmt"] 
+#[lang = "eh_personality"]
 #[no_mangle]
- pub extern fn panic_fmt() -> ! {
+pub extern "C" fn eh_personality() {}
+
+#[panic_handler]
+fn _panic(_info: &core::panic::PanicInfo) -> ! {
     loop {}
 }
