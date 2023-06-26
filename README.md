@@ -22,4 +22,5 @@ To build the OS you will need to run the following commands
 
 ## Honorable Mentions
 https://os.phil-opp.com/multiboot-kernel/
+
 ^^ Has helped me get started with this massive project and I would like to thank the author for their work. And that this project is based off of their work.
