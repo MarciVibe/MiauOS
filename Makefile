@@ -1,47 +1,66 @@
+# Set the default architecture to x86_64
 arch ?= x86_64
 
-# Define the output files
+# Set the path to the kernel binary file
 kernel := build/kernel-$(arch).bin
+
+# Set the path to the ISO file
 iso := build/os-$(arch).iso
 
-# Define the linker script and GRUB configuration file
+# Set the path to the linker script
 linker_script := src/arch/$(arch)/linker.ld
+
+# Set the path to the GRUB configuration file
 grub_cfg := src/arch/$(arch)/grub.cfg
 
-# Define the directory paths
-build_dir := build
-src_dir := src
-arch_dir := $(src_dir)/arch/$(arch)
-build_arch_dir := $(build_dir)/arch/$(arch)
-isofiles_dir := $(build_dir)/isofiles
-boot_dir := $(isofiles_dir)/boot
-grub_dir := $(boot_dir)/grub
+# Find all assembly source files in the architecture directory
+assembly_source_files := $(wildcard src/arch/$(arch)/*.asm)
 
-# Define the Rust target
+# Compile all assembly source files to object files
+assembly_object_files := $(patsubst src/arch/$(arch)/%.asm, \
+	 build/arch/$(arch)/%.o, $(assembly_source_files))
+
+# Set the target to the architecture and operating system name
 target ?= $(arch)-MiauOS
 
-# Define the Rust library
+# Set the path to the Rust object file
 rust_os := target/$(target)/debug/libMiauOS.a
 
-# Define the default target
+# Define the default targets
 .PHONY: all clean run iso kernel
+
+# Build the kernel binary file
 all: $(kernel)
 
-# Define the clean target
+# Remove all build artifacts
 clean:
-	@rm -r $(build_dir)
+	@rm -r build
 
-# Define the run target
+# Run the operating system in QEMU
 run: $(iso)
 	@qemu-system-x86_64 -cdrom $(iso)
 
-# Define the iso target
+# Build the ISO file
 iso: $(iso)
 
-# Create the ISO image
+# Create the ISO file
 $(iso): $(kernel) $(grub_cfg)
-	@mkdir -p $(grub_dir)
-	@cp $(kernel) $(boot_dir)/kernel.bin
-	@cp $(grub_cfg) $(grub_dir)
-	@grub-mkrescue -o $(iso) $(isofiles_dir) 2> /dev/null
-	@rm -r $(isofiles_dir)
+	@mkdir -p build/isofiles/boot/grub
+	@cp $(kernel) build/isofiles/boot/kernel.bin
+	@cp $(grub_cfg) build/isofiles/boot/grub
+	@grub-mkrescue -o $(iso) build/isofiles 2> /dev/null
+	@rm -r build/isofiles
+
+# Build the kernel binary file
+$(kernel): kernel $(rust_os) $(assembly_object_files) $(linker_script)
+	@ld -n -T $(linker_script) -o $(kernel) \
+			$(assembly_object_files) $(rust_os)
+
+# Build the Rust object file
+kernel:
+	@RUST_TARGET_PATH=$(shell pwd) xargo build --target $(target)
+
+# Compile assembly source files to object files
+build/arch/$(arch)/%.o: src/arch/$(arch)/%.asm
+	@mkdir -p $(shell dirname $@)
+	@nasm -felf64 $< -o $@
