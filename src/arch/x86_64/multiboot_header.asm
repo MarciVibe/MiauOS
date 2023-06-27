@@ -1,15 +1,25 @@
 section .multiboot_header
 header_start:
-    dd 0xe85250d6   ; the magic number (multiboot 2)
-    dd 0         ; architecture 0 (protected mode i386)
-    dd header_end - header_start ; total header length
-    ; checksum
+    ; Magic number (multiboot 2)
+    dd 0xe85250d6   
+
+    ; Architecture 0 (protected mode i386)
+    dd 0         
+
+    ; Total header length
+    dd header_end - header_start 
+
+    ; Checksum
     dd 0x100000000 - (0xe85250d6 + 0 + (header_end - header_start))
 
-    ; optional multiboot tags go here
+    ; Optional multiboot tags go here
 
-    ; required end tag
-    dw 0    ; type
-    dw 0    ; flags
-    dd 8    ; size
+    ; Required end tag
+    ; Type
+    dw 0    
+    ; Flags
+    dw 0    
+    ; Size
+    dd 8    
+
 header_end: 

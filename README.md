@@ -1,14 +1,16 @@
 # MiauOS
-A GH repo for an OS I am working on for the next 3 years, the OS will be a 64 bit monlothic kernel built for x86_64. As of now I will be using rust and nasm to build the OS though this is subject to change in the future.
 
-## Building
-To build the OS you will need to run the following commands
-- make run
+MiauOS is a 64-bit monolithic kernel built for x86_64 architecture. It is written in Rust and NASM, and is designed to be a lightweight and efficient operating system.
 
-## Dependencies
-- Qemu
+## Getting Started
+
+### Prerequisites
+
+To build and run MiauOS, you will need the following dependencies:
+
+- QEMU
 - Rust
-- Nasm
+- NASM
 - Make
 - binutils
 - ld
@@ -16,11 +18,43 @@ To build the OS you will need to run the following commands
 - xorriso
 - grub-pc-bin
 - xargo
-## Current Features
+
+### Building and Running
+
+To build and run MiauOS, follow these steps:
+
+1. Clone the repository:
+```
+git clone https://github.com/MarciVibe/MiauOS.git
+```
+
+2. Change into the project directory:
+```
+cd MiauOS
+```
+
+3. Build the operating system:
+```
+make run
+```
+
+This will compile the operating system and launch it in QEMU.
+
+## Features
+
+MiauOS is a work in progress, but currently includes the following features:
+
 - Boots
-- Prints "Hello World!" to the middle of screen with blue background behind text
+- Prints "Hello World!" to the middle of the screen with a blue background behind the text
 
-## Honorable Mentions
-https://os.phil-opp.com/multiboot-kernel/
+## Acknowledgements
 
-^^ Has helped me get started with this massive project and I would like to thank the author for their work. And that this project is based off of their work.
+This project is based on the [Writing an OS in Rust (First Edition)](https://os.phil-opp.com/edition-1/) by Philipp Oppermann. I would like to thank Philipp for his excellent work and for providing a great starting point for this project.
+
+## Contributing
+
+Contributions to MiauOS are welcome! If you would like to contribute, please open an issue or pull request on the GitHub repository.
+
+## License
+
+MiauOS is licensed under the GNU GENERAL PUBLIC LICENSE (Version 3, 29 June 2007). See [LICENSE](LICENSE) for more information.

@@ -1,7 +1,10 @@
-[package]
-name = "MiauOS"
-version = "0.1.0"
-authors = ["Marceline Roennfeldt <roen0014@asms.sa.edu.au>"]
+[package]  # Metadata about the package
 
-[lib]
-crate-type = ["staticlib"]
+name = "MiauOS"  # Name of the package
+
+version = "0.1.0"  # Version of the package
+
+authors = ["Marceline Roennfeldt <roen0014@asms.sa.edu.au>"]  # Author(s) of the package
+
+[lib]  # Configuration for the library crate
+crate-type = ["staticlib"]  # Compile the crate as a static library
