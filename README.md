@@ -8,16 +8,17 @@ MiauOS is a 64-bit monolithic kernel built for x86_64 architecture. It is writte
 
 To build and run MiauOS, you will need the following dependencies:
 
-- QEMU
-- Rust
-- NASM
-- Make
+- qemu
+- rust
+- nasm
+- make
 - binutils
 - ld
 - grub-mkrescue
 - xorriso
 - grub-pc-bin
 - xargo
+- git
 
 ### Building and Running
 
@@ -49,7 +50,7 @@ MiauOS is a work in progress, but currently includes the following features:
 
 ## Acknowledgements
 
-This project is based on the [Writing an OS in Rust (First Edition)](https://os.phil-opp.com/edition-1/) by Philipp Oppermann. I would like to thank Philipp for his excellent work and for providing a great starting point for this project.
+This project is based on the [Writing an OS in Rust (First Edition)](https://os.phil-opp.com/edition-1/) and [Writing an OS in Rust (Second Edition)](https://os.phil-opp.com/) by Philipp Oppermann. I would like to thank Philipp for his excellent work and for providing a great starting point for this project.
 
 ## Contributing
 

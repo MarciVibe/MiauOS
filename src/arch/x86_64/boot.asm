@@ -29,7 +29,7 @@ start:
 
     ; Jump to the long mode start address
     jmp gdt64.code:long_mode_start
-
+    
     ; If any of the checks fail, jump to this function to print an error message
     error:
         mov dword [0xb8000], 0x4f524f45 ; "ERR:"
