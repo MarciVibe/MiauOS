@@ -14,8 +14,8 @@ long_mode_start:
     mov gs, ax
 
     ; Call the rust_main function, which is defined in a Rust module
-    extern rust_main
-    call rust_main
+    extern _start
+    call _start
 
     ; Print the string "OKAY" to the screen
     ; The string is represented as a 64-bit value and stored at memory address 0xb8000
