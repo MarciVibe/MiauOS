@@ -17,7 +17,6 @@ To build and run MiauOS, you will need the following dependencies:
 - grub-mkrescue
 - xorriso
 - grub-pc-bin
-- xargo
 - git
 
 ### Building and Running

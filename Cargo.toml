@@ -9,12 +9,5 @@ authors = ["Marceline Roennfeldt <roen0014@asms.sa.edu.au>"]  # Author(s) of the
 [lib]  # Configuration for the library crate
 crate-type = ["staticlib"]  # Compile the crate as a static library
 
-[unstable]
-build-std-features = ["compiler-builtins-mem"]
-build-std = ["core", "compiler_builtins"]
-
-[build]
-target = "x86_64-MiauOS.json"
-
 [dependencies]  # Dependencies of the package
-volatile = "0.2.6"
+volatile = "0.5.1"
