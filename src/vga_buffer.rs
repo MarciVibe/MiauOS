@@ -1,12 +1,11 @@
-use volatile::VolatilePtr;
-
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(u8)]
+
 pub enum Color {
     Black = 0,
     Blue = 1,
-    Green = 2,
+    Green = 2, 
     Cyan = 3,
     Red = 4,
     Magenta = 5,
@@ -21,6 +20,7 @@ pub enum Color {
     Yellow = 14,
     White = 15,
 }
+
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(transparent)]
@@ -42,9 +42,11 @@ struct ScreenChar {
 const BUFFER_HEIGHT: usize = 25;
 const BUFFER_WIDTH: usize = 80;
 
-#[repr(transparent)]
+extern crate volatile;
+use self::volatile::Volatile;
+
 struct Buffer {
-    chars: [[ScreenChar; BUFFER_WIDTH]; BUFFER_HEIGHT],
+    chars: [[Volatile<ScreenChar>; BUFFER_WIDTH]; BUFFER_HEIGHT],
 }
 
 pub struct Writer {
@@ -64,19 +66,18 @@ impl Writer {
 
                 let row = BUFFER_HEIGHT - 1;
                 let col = self.column_position;
-
                 let color_code = self.color_code;
-                self.buffer.chars[row][col] = ScreenChar {
+
+                self.buffer.chars[row][col].write(ScreenChar {
                     ascii_character: byte,
                     color_code,
-                };
+                });
                 self.column_position += 1;
             }
         }
     }
 
-    fn new_line(&mut self) { /* TODO */
-    }
+    fn new_line(&mut self) {/* TODO */}
 }
 
 impl Writer {
@@ -88,6 +89,7 @@ impl Writer {
                 // not part of printable ASCII range
                 _ => self.write_byte(0xfe),
             }
+
         }
     }
 }

@@ -10,4 +10,4 @@ authors = ["Marceline Roennfeldt <roen0014@asms.sa.edu.au>"]  # Author(s) of the
 crate-type = ["staticlib"]  # Compile the crate as a static library
 
 [dependencies]  # Dependencies of the package
-volatile = "0.5.1"
+volatile = "0.2.6"
